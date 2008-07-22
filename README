@@ -1,0 +1,33 @@
+== Fetches ==
+
+Fetches is a simple extension to ActionController that allows you to DRY up your
+model fetching with a simple, intuitive syntax. Rather than creating helpers or
+manually finding records each time an action is processed, simply add a call to
+'fetches' in your controller and it will take care of the rest.
+
+== Example ==
+
+  class UsersController < ApplicationController
+    fetches :user
+    
+    def show
+      user # equivalent to a memoizing call to User.find(params[:id])
+    end
+  end
+  
+It's very simple, and can also be extended to meet more complex demands, such as:
+  
+  # routes as a nested /users/:user_id/articles
+  class ArticlesController < ApplicationController
+    fetches :user, :as => :author, :from => :user_id, :using => find_by_login
+    fetches :article
+    
+    def index
+      author # equivalent to User.find_by_login(params[:user_id])
+    end
+  end
+
+The helper method generated memoizes (initializes once then doesn't make additional
+calls to the database) and is available both in the controller and the view.
+
+Copyright (c) 2008 Michael Bleigh and Intridea, Inc., released under the MIT license
