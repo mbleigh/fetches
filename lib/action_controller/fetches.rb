@@ -1,12 +1,12 @@
 module ActionController
   module Fetches
-    def self.included(base)
+    def self.included(base) # :nodoc:
       base.class_eval do
         @@default_fetcher_options = { :using => "find",
                                       :from => :id }
         cattr_accessor :default_fetcher_options
         
-        def self.fetchers
+        def self.fetchers # :nodoc:
           read_inheritable_attribute(:fetchers) || write_inheritable_attribute(:fetchers, {})
         end
 
@@ -25,16 +25,15 @@ module ActionController
         #     fetches :article
         #   end
         #
-        #  # Example with Proc-based 'from'
-        #  class UsersController < ApplicationController
-        #    fetches :user, :from => Proc.new{ |c| c.params[:user_id] || c.params[:id] }
-        #  end
+        #   # Example with Proc-based 'from'
+        #   class UsersController < ApplicationController
+        #     fetches :user, :from => Proc.new{ |c| c.params[:user_id] || c.params[:id] }
+        #   end
         #
         # Options:
         #
         # - +as+: the name of the helper method to generate (default is the model name)
-        # - +from+: the parameter passed into the finder method (default is +:id+). 
-        #     May also be passed as a +Proc+ that evaluates against a controller argument.
+        # - +from+: the parameter passed into the finder method (default is +:id+). May also be passed as a Proc that evaluates against a controller argument.
         # - +using+: the class method name to use as a finder (default is +"find"+)
         #
         # Default options may be specified by setting them in an initializer. Example:
