@@ -1,11 +1,22 @@
-== Fetches ==
+= Fetches
 
 Fetches is a simple extension to ActionController that allows you to DRY up your
 model fetching with a simple, intuitive syntax. Rather than creating helpers or
 manually finding records each time an action is processed, simply add a call to
 'fetches' in your controller and it will take care of the rest.
 
-== Example ==
+== Installation
+
+Fetches is available as a gem as well as in traditional plugin format. To install
+as a gem, add this to your environment.rb:
+
+  config.gem 'mbleigh-fetches', :source => 'http://gems.github.com', :lib => "fetches"
+  
+To install it as a traditional plugin:
+
+  script/plugin install git://github.com/mbleigh/fetches.git
+
+== Example
 
   class UsersController < ApplicationController
     fetches :user
@@ -25,6 +36,13 @@ It's very simple, and can also be extended to meet more complex demands, such as
     def index
       author # equivalent to User.find_by_login(params[:user_id])
     end
+  end
+  
+You may also pass a Proc into the "from" option in order to fetch from
+a more complex set of requirements:
+
+  class UsersController < ApplicationController
+    fetches :user, :from => Proc.new{ |c| c.params[:user_id] || c.params[:id] }
   end
 
 The helper method generated memoizes (initializes once then doesn't make additional

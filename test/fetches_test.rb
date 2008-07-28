@@ -20,6 +20,6 @@ class FetchesTest < Test::Unit::TestCase
     controller.params = {:id => 2}
     assert_equal "two worked", controller.fetch_test_model
     controller.params = {:id => 3}
-    assert_throws(ActiveRecord::RecordNotFound)
+    assert_throws(Exception)
   end
 end

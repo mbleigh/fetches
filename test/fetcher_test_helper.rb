@@ -7,7 +7,7 @@ class FetchTestModel
     when 2
       "two worked"
     else
-      raise ActiveRecord::RecordNotFound, "Couldn't find FetchTestModel with ID=#{some_integer.to_i}"
+      raise "Couldn't find FetchTestModel with ID=#{some_integer.to_i}"
     end
   end
   
