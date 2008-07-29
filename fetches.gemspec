@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "fetches"
-  s.version = "0.0.2"
+  s.version = "0.0.3"
   s.date = "2008-07-28"
   s.summary = "Rails plugin for simplified parameter-based model fetching."
   s.email = "michael@intridea.com"
