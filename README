@@ -30,7 +30,7 @@ It's very simple, and can also be extended to meet more complex demands, such as
   
   # routes as a nested /users/:user_id/articles
   class ArticlesController < ApplicationController
-    fetches :user, :as => :author, :from => :user_id, :using => find_by_login
+    fetches :user, :as => :author, :from => :user_id, :using => :find_by_login
     fetches :article
     
     def index
@@ -44,6 +44,13 @@ a more complex set of requirements:
   class UsersController < ApplicationController
     fetches :user, :from => Proc.new{ |c| c.params[:user_id] || c.params[:id] }
   end
+  
+Finally, you can use the :initialize option to initialize a new record using
+parameters or Proc-based information:
+
+  fetches :user, :initialize => true
+  fetches :user, :initialize => :author # initialize from params[:author]
+  fetches :user, :initialize => Proc.new{ |c| {:login => params[:login], :email => params[:email]} }
 
 The helper method generated memoizes (initializes once then doesn't make additional
 calls to the database) and is available both in the controller and the view.
