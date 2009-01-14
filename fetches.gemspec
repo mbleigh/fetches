@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name = "fetches"
-  s.version = "0.0.3"
+  s.version = "0.0.4"
   s.date = "2008-07-28"
   s.summary = "Rails plugin for simplified parameter-based model fetching."
   s.email = "michael@intridea.com"
-  s.homepage = "http://www.actsascommunity.com/projects/fetches"
+  s.homepage = "http://github.com/mbleigh/fetches"
   s.description = "Rails plugin for simplified parameter-based model fetching."
   s.has_rdoc = true
   s.authors = ["Michael Bleigh"]
